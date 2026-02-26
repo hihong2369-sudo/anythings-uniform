@@ -1,557 +1,701 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>애니띵즈 유니폼 신청</title>
-<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --navy: #0a1628;
-    --blue: #1a3a6b;
-    --accent: #e8a020;
-    --white: #f8f6f0;
-    --gray: #8a9ab5;
-    --light: #eef2f8;
-    --red: #c0392b;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>애니띵즈 유니폼 신청</title>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1B3A5C;
+            --accent: #E891B2;
+            --accent-hover: #D77AA0;
+            --cream: #F5F0E8;
+            --warm-white: #FAFAF7;
+            --text: #2C2C2C;
+            --text-light: #6B6B6B;
+            --border: #DDD8CE;
+            --success: #2E7D4F;
+            --field-bg: #FFFFFF;
+            --shadow: 0 2px 12px rgba(27,58,92,0.08);
+        }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
-    background: var(--navy);
-    font-family: 'Noto Sans KR', sans-serif;
-    min-height: 100vh;
-    padding: 0 0 60px;
-    color: var(--white);
-  }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
 
-  /* Header */
-  .header {
-    background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
-    padding: 40px 20px 30px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    border-bottom: 3px solid var(--accent);
-  }
-  .header::before {
-    content: '⚾';
-    position: absolute;
-    font-size: 200px;
-    opacity: 0.04;
-    top: -40px;
-    right: -20px;
-    transform: rotate(15deg);
-  }
-  .header-badge {
-    display: inline-block;
-    background: var(--accent);
-    color: var(--navy);
-    font-family: 'Black Han Sans', sans-serif;
-    font-size: 11px;
-    letter-spacing: 3px;
-    padding: 4px 14px;
-    border-radius: 20px;
-    margin-bottom: 12px;
-  }
-  .header h1 {
-    font-family: 'Black Han Sans', sans-serif;
-    font-size: clamp(28px, 6vw, 42px);
-    letter-spacing: 2px;
-    line-height: 1.2;
-    margin-bottom: 8px;
-  }
-  .header h1 span { color: var(--accent); }
-  .header p {
-    color: var(--gray);
-    font-size: 13px;
-    font-weight: 300;
-  }
+        .hero {
+            background: var(--primary);
+            position: relative;
+            overflow: hidden;
+            padding: 48px 20px 40px;
+            text-align: center;
+        }
 
-  /* Form Container */
-  .container {
-    max-width: 560px;
-    margin: 0 auto;
-    padding: 30px 20px 0;
-  }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -20%;
+            width: 140%; height: 200%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(232,145,178,0.15) 0%, transparent 60%),
+                        radial-gradient(ellipse at 70% 30%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
 
-  /* Section */
-  .section {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 16px;
-    padding: 24px;
-    margin-bottom: 16px;
-    backdrop-filter: blur(10px);
-  }
-  .section-title {
-    font-family: 'Black Han Sans', sans-serif;
-    font-size: 13px;
-    letter-spacing: 2px;
-    color: var(--accent);
-    margin-bottom: 18px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .section-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: rgba(255,255,255,0.08);
-  }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--accent);
+        }
 
-  /* Form elements */
-  .field { margin-bottom: 16px; }
-  .field:last-child { margin-bottom: 0; }
+        .stitch-line {
+            position: absolute;
+            top: 12px; left: 50%;
+            transform: translateX(-50%);
+            display: flex; gap: 8px;
+            opacity: 0.3;
+        }
+        .stitch-line span {
+            width: 14px; height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+            transform: rotate(-20deg);
+        }
+        .stitch-line span:nth-child(even) { transform: rotate(20deg); }
 
-  label {
-    display: block;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--gray);
-    margin-bottom: 6px;
-    letter-spacing: 0.5px;
-  }
-  label .required {
-    color: var(--accent);
-    margin-left: 3px;
-  }
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 2px;
+            padding: 5px 16px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            position: relative;
+            text-transform: uppercase;
+        }
 
-  input[type="text"],
-  input[type="number"],
-  input[type="tel"],
-  select {
-    width: 100%;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 10px;
-    padding: 13px 16px;
-    color: var(--white);
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 15px;
-    transition: all 0.2s;
-    -webkit-appearance: none;
-  }
-  input:focus, select:focus {
-    outline: none;
-    border-color: var(--accent);
-    background: rgba(255,255,255,0.09);
-    box-shadow: 0 0 0 3px rgba(232,160,32,0.15);
-  }
-  input::placeholder { color: rgba(255,255,255,0.2); }
+        .hero h1 {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: clamp(28px, 6vw, 42px);
+            color: white;
+            letter-spacing: -0.5px;
+            position: relative;
+            margin-bottom: 6px;
+        }
 
-  select option { background: var(--navy); color: var(--white); }
+        .hero h1 .highlight { color: var(--accent); }
 
-  /* Row */
-  .row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  .row-3 {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-  }
+        .hero-sub {
+            font-size: 14px;
+            color: rgba(255,255,255,0.65);
+            font-weight: 300;
+            position: relative;
+        }
 
-  /* Radio group */
-  .radio-group {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .radio-item {
-    flex: 1;
-    min-width: 80px;
-  }
-  .radio-item input[type="radio"] { display: none; }
-  .radio-item label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 11px 8px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 13px;
-    color: var(--white);
-    font-weight: 400;
-    transition: all 0.2s;
-    text-align: center;
-    margin: 0;
-  }
-  .radio-item input:checked + label {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: var(--navy);
-    font-weight: 700;
-  }
+        /* Form */
+        .form-container {
+            max-width: 600px;
+            margin: 24px auto 40px;
+            padding: 0 16px;
+        }
 
-  /* Checkbox group */
-  .check-group {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .check-item input[type="checkbox"] { display: none; }
-  .check-item label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 11px 14px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 13px;
-    color: var(--white);
-    font-weight: 400;
-    transition: all 0.2s;
-    margin: 0;
-  }
-  .check-item input:checked + label {
-    background: rgba(232,160,32,0.2);
-    border-color: var(--accent);
-    color: var(--accent);
-    font-weight: 600;
-  }
+        .form-wrapper {
+            background: white;
+            border-radius: 16px;
+            padding: 32px 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
 
-  /* Size guide */
-  .size-note {
-    font-size: 11px;
-    color: var(--gray);
-    margin-top: 6px;
-    padding: 8px 12px;
-    background: rgba(255,255,255,0.03);
-    border-radius: 8px;
-    border-left: 2px solid var(--accent);
-    line-height: 1.6;
-  }
+        .form-title {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 22px;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
 
-  /* Submit */
-  .submit-wrap {
-    padding: 0 20px;
-    max-width: 560px;
-    margin: 24px auto 0;
-  }
-  .btn-submit {
-    width: 100%;
-    padding: 18px;
-    background: var(--accent);
-    color: var(--navy);
-    border: none;
-    border-radius: 14px;
-    font-family: 'Black Han Sans', sans-serif;
-    font-size: 18px;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: all 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-  .btn-submit:hover {
-    background: #f5b030;
-    transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(232,160,32,0.35);
-  }
-  .btn-submit:active { transform: translateY(0); }
+        .form-desc {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 28px;
+        }
 
-  /* Success message */
-  .success {
-    display: none;
-    text-align: center;
-    padding: 50px 30px;
-    animation: fadeIn 0.5s ease;
-  }
-  .success .icon { font-size: 64px; margin-bottom: 16px; }
-  .success h2 {
-    font-family: 'Black Han Sans', sans-serif;
-    font-size: 26px;
-    color: var(--accent);
-    margin-bottom: 10px;
-  }
-  .success p { color: var(--gray); font-size: 14px; line-height: 1.7; }
+        .form-group { margin-bottom: 20px; }
 
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .form-group label {
+            display: block;
+            font-size: 13px; font-weight: 600;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
 
-  /* Info box */
-  .info-box {
-    background: rgba(232,160,32,0.08);
-    border: 1px solid rgba(232,160,32,0.2);
-    border-radius: 10px;
-    padding: 12px 14px;
-    font-size: 12px;
-    color: var(--gray);
-    line-height: 1.7;
-    margin-bottom: 16px;
-  }
-  .info-box b { color: var(--accent); }
-</style>
+        .form-group label .required {
+            color: var(--accent);
+            margin-left: 2px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="tel"],
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 14px;
+            color: var(--text);
+            background: var(--field-bg);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(27,58,92,0.1);
+        }
+
+        .form-hint {
+            font-size: 11px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* Radio / Option Group */
+        .option-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .option-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 13px; font-weight: 500;
+            color: var(--text);
+            transition: all 0.2s;
+            flex: 1;
+            min-width: 100px;
+            justify-content: center;
+            user-select: none;
+        }
+
+        .option-group label:hover {
+            border-color: var(--primary);
+            background: rgba(27,58,92,0.03);
+        }
+
+        .option-group input[type="radio"],
+        .option-group input[type="checkbox"] { display: none; }
+
+        .option-group input[type="radio"]:checked + label,
+        .option-group input[type="checkbox"]:checked + label {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .form-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 24px 0;
+        }
+
+        .section-label {
+            font-size: 15px; font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 3px; height: 16px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* Pants padding section */
+        .padding-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .padding-sub-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 6px;
+        }
+
+        /* Submit */
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 18px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            margin-top: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover { background: var(--accent-hover); }
+        .submit-btn:active { transform: scale(0.98); }
+        .submit-btn:disabled { background: #B0B0B0; cursor: not-allowed; transform: none; }
+
+        .submit-btn .spinner {
+            display: none;
+            width: 20px; height: 20px;
+            border: 2.5px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin: 0 auto;
+        }
+
+        .submit-btn.loading .btn-text { display: none; }
+        .submit-btn.loading .spinner { display: block; }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .privacy-note {
+            font-size: 11px;
+            color: var(--text-light);
+            text-align: center;
+            margin-top: 12px;
+            line-height: 1.6;
+        }
+
+        /* Success */
+        .success-overlay {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(27,58,92,0.6);
+            backdrop-filter: blur(6px);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeIn 0.3s;
+        }
+
+        .success-overlay.show { display: flex; }
+
+        .success-card {
+            background: white;
+            border-radius: 20px;
+            padding: 48px 32px;
+            text-align: center;
+            max-width: 400px; width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .success-icon {
+            width: 72px; height: 72px;
+            background: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .success-icon svg {
+            width: 36px; height: 36px;
+            stroke: white; stroke-width: 3; fill: none;
+            stroke-dasharray: 50;
+            stroke-dashoffset: 50;
+            animation: checkDraw 0.5s 0.3s forwards;
+        }
+
+        @keyframes checkDraw { to { stroke-dashoffset: 0; } }
+
+        .success-card h2 {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .success-card p {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .success-close-btn {
+            margin-top: 24px;
+            padding: 12px 32px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 14px; font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .success-close-btn:hover { background: #15304D; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        .error-msg {
+            display: none;
+            background: #FFF0EF;
+            border: 1px solid #FFCCC9;
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: #D03028;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .error-msg.show { display: block; }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 11px;
+            color: var(--text-light);
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        @media (max-width: 420px) {
+            .form-wrapper { padding: 24px 18px; }
+            .form-row { grid-template-columns: 1fr; }
+            .padding-grid { grid-template-columns: 1fr; }
+            .hero { padding: 36px 16px 32px; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="header-badge">ANYTHINGS BASEBALL</div>
-  <h1>유니폼 <span>신청서</span></h1>
-  <p>정확한 사이즈를 입력해주세요 ⚾</p>
+<header class="hero">
+    <div class="stitch-line">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="hero-badge">ANYTHINGS</div>
+    <h1>애니띵즈<br><span class="highlight">유니폼 신청</span></h1>
+    <p class="hero-sub">볼파크 아크바 · BALL PARK ACBA</p>
+</header>
+
+<main class="form-container">
+    <div class="form-wrapper">
+        <div class="form-title">유니폼 주문서</div>
+        <div class="form-desc">아래 정보를 정확히 입력해주세요. 사이즈 교환이 어려울 수 있습니다.</div>
+
+        <div class="error-msg" id="errorMsg"></div>
+
+        <form id="uniformForm" onsubmit="return false;">
+
+            <!-- 기본 정보 -->
+            <div class="section-label">기본 정보</div>
+
+            <div class="form-group">
+                <label>이름 <span class="required">*</span></label>
+                <input type="text" id="name" placeholder="홍길동" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>배번 <span class="required">*</span></label>
+                    <input type="text" id="backNumber" placeholder="예: 7" required>
+                </div>
+                <div class="form-group">
+                    <label>이니셜 <span class="required">*</span></label>
+                    <input type="text" id="initial" placeholder="예: HONG" required>
+                    <div class="form-hint">유니폼에 들어갈 영문 이니셜</div>
+                </div>
+            </div>
+
+            <div class="form-divider"></div>
+
+            <!-- 신체 정보 -->
+            <div class="section-label">신체 정보</div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>키 (cm) <span class="required">*</span></label>
+                    <input type="text" id="height" placeholder="예: 165" required>
+                </div>
+                <div class="form-group">
+                    <label>몸무게 (kg) <span class="required">*</span></label>
+                    <input type="text" id="weight" placeholder="예: 55" required>
+                </div>
+            </div>
+
+            <div class="form-divider"></div>
+
+            <!-- 사이즈 -->
+            <div class="section-label">사이즈</div>
+
+            <div class="form-group">
+                <label>상의 사이즈 <span class="required">*</span></label>
+                <div class="option-group">
+                    <input type="radio" name="topSize" id="top_xs" value="XS">
+                    <label for="top_xs">XS</label>
+                    <input type="radio" name="topSize" id="top_s" value="S">
+                    <label for="top_s">S</label>
+                    <input type="radio" name="topSize" id="top_m" value="M">
+                    <label for="top_m">M</label>
+                    <input type="radio" name="topSize" id="top_l" value="L">
+                    <label for="top_l">L</label>
+                </div>
+                <div class="option-group" style="margin-top: 8px;">
+                    <input type="radio" name="topSize" id="top_xl" value="XL">
+                    <label for="top_xl">XL</label>
+                    <input type="radio" name="topSize" id="top_2xl" value="2XL">
+                    <label for="top_2xl">2XL</label>
+                    <input type="radio" name="topSize" id="top_3xl" value="3XL">
+                    <label for="top_3xl">3XL</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>허리 사이즈 <span class="required">*</span></label>
+                <input type="text" id="waistSize" placeholder="예: 30" required>
+                <div class="form-hint">인치 또는 cm 단위로 입력해주세요</div>
+            </div>
+
+            <div class="form-group">
+                <label>모자 사이즈 <span class="required">*</span></label>
+                <input type="text" id="capSize" placeholder="예: 57" required>
+                <div class="form-hint">cm 단위 (보통 55~62)</div>
+            </div>
+
+            <div class="form-divider"></div>
+
+            <!-- 바지 스타일 -->
+            <div class="section-label">바지 스타일</div>
+
+            <div class="form-group">
+                <label>바지 스타일 1 <span class="required">*</span></label>
+                <div class="option-group">
+                    <input type="radio" name="pantsStyle1" id="ps1_normal" value="일반">
+                    <label for="ps1_normal">일반</label>
+                    <input type="radio" name="pantsStyle1" id="ps1_skinny" value="스키니">
+                    <label for="ps1_skinny">스키니</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>바지 스타일 2 <span class="required">*</span></label>
+                <div class="option-group">
+                    <input type="radio" name="pantsStyle2" id="ps2_normal" value="일반">
+                    <label for="ps2_normal">일반</label>
+                    <input type="radio" name="pantsStyle2" id="ps2_farm" value="농군">
+                    <label for="ps2_farm">농군</label>
+                </div>
+            </div>
+
+            <div class="form-divider"></div>
+
+            <!-- 바지 누빔 -->
+            <div class="section-label">바지 누빔</div>
+
+            <div class="form-group">
+                <label>누빔 여부 <span class="required">*</span></label>
+                <div class="option-group">
+                    <input type="radio" name="padding" id="pad_yes" value="O" onchange="handlePaddingChange()">
+                    <label for="pad_yes">O (있음)</label>
+                    <input type="radio" name="padding" id="pad_no" value="X" onchange="handlePaddingChange()">
+                    <label for="pad_no">X (없음)</label>
+                </div>
+            </div>
+
+            <div id="paddingDetails" style="display:none;">
+                <div class="padding-grid">
+                    <div class="form-group">
+                        <div class="padding-sub-label">타석 방향</div>
+                        <div class="option-group">
+                            <input type="radio" name="batSide" id="bat_left" value="좌타">
+                            <label for="bat_left">좌타</label>
+                            <input type="radio" name="batSide" id="bat_right" value="우타">
+                            <label for="bat_right">우타</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="padding-sub-label">누빔 위치</div>
+                        <div class="option-group">
+                            <input type="radio" name="padPosition" id="pos_knee" value="무릎">
+                            <label for="pos_knee">무릎</label>
+                            <input type="radio" name="padPosition" id="pos_hip" value="엉덩이">
+                            <label for="pos_hip">엉덩이</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="submit-btn" id="submitBtn" onclick="submitForm()">
+                <span class="btn-text">유니폼 신청하기</span>
+                <div class="spinner"></div>
+            </button>
+
+            <p class="privacy-note">
+                주문 후 사이즈 교환이 어려울 수 있으니 정확히 입력해주세요.
+            </p>
+        </form>
+    </div>
+</main>
+
+<!-- Success -->
+<div class="success-overlay" id="successOverlay">
+    <div class="success-card">
+        <div class="success-icon">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>신청 완료!</h2>
+        <p>유니폼 신청이 정상적으로 접수되었습니다.<br>감사합니다! ⚾</p>
+        <button class="success-close-btn" onclick="closeSuccess()">확인</button>
+    </div>
 </div>
 
-<form id="uniformForm">
-<div class="container">
-
-  <!-- 기본 정보 -->
-  <div class="section">
-    <div class="section-title">01 기본 정보</div>
-
-    <div class="row">
-      <div class="field">
-        <label>이름 <span class="required">*</span></label>
-        <input type="text" name="name" placeholder="홍길동" required>
-      </div>
-      <div class="field">
-        <label>배번 <span class="required">*</span></label>
-        <input type="number" name="number" placeholder="예) 7" min="0" max="99" required>
-      </div>
-    </div>
-
-    <div class="field">
-      <label>이니셜 <span class="required">*</span></label>
-      <input type="text" name="initial" placeholder="예) Kim G Y" required>
-      <div class="size-note">영문 이니셜 (성 이름 이름 순서로 입력)</div>
-    </div>
-  </div>
-
-  <!-- 신체 사이즈 -->
-  <div class="section">
-    <div class="section-title">02 신체 사이즈</div>
-
-    <div class="row">
-      <div class="field">
-        <label>키 (cm) <span class="required">*</span></label>
-        <input type="number" name="height" placeholder="예) 128" required>
-      </div>
-      <div class="field">
-        <label>몸무게 (kg) <span class="required">*</span></label>
-        <input type="number" name="weight" placeholder="예) 25" required>
-      </div>
-    </div>
-  </div>
-
-  <!-- 유니폼 사이즈 -->
-  <div class="section">
-    <div class="section-title">03 유니폼 사이즈</div>
-
-    <div class="info-box">
-      정확한 사이즈 측정 후 입력 바랍니다.<br>
-      <b>상의</b>: 어깨너비+가슴둘레 기준 / <b>허리</b>: 허리 가장 가는 부위 (인치)
-    </div>
-
-    <div class="row">
-      <div class="field">
-        <label>상의 사이즈 <span class="required">*</span></label>
-        <select name="top_size" required>
-          <option value="" disabled selected>선택</option>
-          <option>110</option>
-          <option>120</option>
-          <option>130</option>
-          <option>140</option>
-          <option>150</option>
-          <option>160</option>
-          <option>170</option>
-          <option>S</option>
-          <option>M</option>
-          <option>L</option>
-          <option>XL</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>허리 사이즈 (인치) <span class="required">*</span></label>
-        <input type="number" name="waist" placeholder="예) 22" min="18" max="40" required>
-      </div>
-    </div>
-
-    <div class="field">
-      <label>모자 사이즈 <span class="required">*</span></label>
-      <div class="radio-group">
-        <div class="radio-item">
-          <input type="radio" name="hat_size" id="hat1" value="50-52">
-          <label for="hat1">50-52</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="hat_size" id="hat2" value="53-55">
-          <label for="hat2">53-55</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="hat_size" id="hat3" value="56-58">
-          <label for="hat3">56-58</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="hat_size" id="hat4" value="59-61">
-          <label for="hat4">59-61</label>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 바지 옵션 -->
-  <div class="section">
-    <div class="section-title">04 바지 옵션</div>
-
-    <div class="field">
-      <label>바지 스타일 1 <span class="required">*</span></label>
-      <div class="radio-group">
-        <div class="radio-item">
-          <input type="radio" name="pants_style1" id="ps1_1" value="일반">
-          <label for="ps1_1">일반</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="pants_style1" id="ps1_2" value="밴딩">
-          
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="pants_style1" id="ps1_3" value="풀업">
-          <label for="ps1_3">풀업</label>
-        </div>
-      </div>
-    </div>
-
-    <div class="field">
-      <label>바지 스타일 2 <span class="required">*</span></label>
-      <div class="radio-group">
-        <div class="radio-item">
-          <input type="radio" name="pants_style2" id="ps2_1" value="일반">
-          <label for="ps2_1">일반</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="pants_style2" id="ps2_2" value="농군">
-          <label for="ps2_2">농군</label>
-        </div>
-      </div>
-    </div>
-
-    <div class="field">
-      <label>바지 무릎 누빔 여부 <span class="required">*</span></label>
-      <div class="radio-group">
-        <div class="radio-item">
-          <input type="radio" name="pants_padding" id="pp1" value="O">
-          <label for="pp1">O (있음)</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="pants_padding" id="pp2" value="X">
-          <label for="pp2">X (없음)</label>
-        </div>
-      </div>
-    </div>
-
-    <div class="field" id="batting_field" style="display:none">
-      <label>타석 방향 <span class="required">*</span></label>
-      <div class="radio-group">
-        <div class="radio-item">
-          <input type="radio" name="batting" id="bt1" value="좌타">
-          <label for="bt1">좌타</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="batting" id="bt2" value="우타">
-          <label for="bt2">우타</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="batting" id="bt3" value="양쪽">
-          <label for="bt3">양쪽</label>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 연락처 -->
-  <div class="section">
-    <div class="section-title">05 연락처</div>
-    <div class="field">
-      <label>보호자 연락처 <span class="required">*</span></label>
-      <input type="tel" name="phone" placeholder="010-0000-0000" required>
-    </div>
-  </div>
-
-</div>
-
-<div class="submit-wrap">
-  <button type="submit" class="btn-submit">신청 완료하기</button>
-</div>
-</form>
-
-<!-- 완료 메시지 -->
-<div class="container">
-  <div class="success" id="successMsg">
-    <div class="icon">⚾</div>
-    <h2>신청 완료!</h2>
-    <p>유니폼 신청이 접수되었습니다.<br>제작 완료 후 개별 연락드리겠습니다.<br><br><b style="color:var(--accent)">애니띵즈 야구단</b>과 함께<br>즐거운 야구 하세요!</p>
-  </div>
-</div>
+<footer class="footer">
+    &copy; 2025 <a href="#">볼파크 아크바 BALL PARK ACBA</a> · 애니띵즈
+</footer>
 
 <script>
-  // 누빔 선택시 타석 방향 표시
-  document.querySelectorAll('input[name="pants_padding"]').forEach(el => {
-    el.addEventListener('change', function() {
-      document.getElementById('batting_field').style.display =
-        this.value === 'O' ? 'block' : 'none';
-    });
-  });
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxA-TJdlUHVRfLxo7LaL3TRRuzLCGltVqM-j2FSLAnw_TqCDJTjoG06hVh9WF9sHPNUug/exec';
 
-  // 구글 시트 연동 URL (Apps Script 배포 후 여기에 붙여넣기)
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw3irDOXJfeGbszfd2bIevwDYPxq-JjMeo18YJ5xsCOoa2vWQIZMRzyZ3nQeRaf3zrh5A/exec';
-
-  // 폼 제출
-  document.getElementById('uniformForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    // 필수 라디오 체크
-    const radios = ['hat_size', 'pants_style1', 'pants_style2', 'pants_padding'];
-    for (let name of radios) {
-      if (!document.querySelector(`input[name="${name}"]:checked`)) {
-        alert('모든 항목을 선택해주세요.');
-        return;
-      }
+    function handlePaddingChange() {
+        const selected = document.querySelector('input[name="padding"]:checked');
+        document.getElementById('paddingDetails').style.display =
+            (selected && selected.value === 'O') ? 'block' : 'none';
     }
 
-    // 누빔 O인 경우 타석 방향 체크
-    const padding = document.querySelector('input[name="pants_padding"]:checked');
-    if (padding && padding.value === 'O') {
-      if (!document.querySelector('input[name="batting"]:checked')) {
-        alert('타석 방향을 선택해주세요.');
-        return;
-      }
+    function validateForm() {
+        const name = document.getElementById('name').value.trim();
+        const backNumber = document.getElementById('backNumber').value.trim();
+        const initial = document.getElementById('initial').value.trim();
+        const height = document.getElementById('height').value.trim();
+        const weight = document.getElementById('weight').value.trim();
+        const topSize = document.querySelector('input[name="topSize"]:checked');
+        const waistSize = document.getElementById('waistSize').value.trim();
+        const capSize = document.getElementById('capSize').value.trim();
+        const pantsStyle1 = document.querySelector('input[name="pantsStyle1"]:checked');
+        const pantsStyle2 = document.querySelector('input[name="pantsStyle2"]:checked');
+        const padding = document.querySelector('input[name="padding"]:checked');
+
+        if (!name || !backNumber || !initial || !height || !weight || !topSize || !waistSize || !capSize || !pantsStyle1 || !pantsStyle2 || !padding) {
+            return false;
+        }
+
+        if (padding.value === 'O') {
+            const batSide = document.querySelector('input[name="batSide"]:checked');
+            const padPosition = document.querySelector('input[name="padPosition"]:checked');
+            if (!batSide || !padPosition) return false;
+        }
+
+        return true;
     }
 
-    // 버튼 로딩 상태
-    const btn = document.querySelector('.btn-submit');
-    btn.textContent = '전송 중...';
-    btn.disabled = true;
+    async function submitForm() {
+        const errorMsg = document.getElementById('errorMsg');
+        const submitBtn = document.getElementById('submitBtn');
+        errorMsg.classList.remove('show');
 
-    // 데이터 수집
-    const formData = new FormData(this);
-    const data = Object.fromEntries(formData.entries());
-    data.timestamp = new Date().toLocaleString('ko-KR');
+        if (!validateForm()) {
+            errorMsg.textContent = '필수 항목(*)을 모두 입력해주세요.';
+            errorMsg.classList.add('show');
+            errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
 
-    try {
-      await fetch(SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
+        const padding = document.querySelector('input[name="padding"]:checked').value;
+        let paddingInfo = 'X';
+        if (padding === 'O') {
+            const batSide = document.querySelector('input[name="batSide"]:checked').value;
+            const padPosition = document.querySelector('input[name="padPosition"]:checked').value;
+            paddingInfo = 'O / ' + batSide + ' / ' + padPosition;
+        }
 
-      // 완료 화면
-      this.style.display = 'none';
-      document.querySelector('.submit-wrap').style.display = 'none';
-      document.getElementById('successMsg').style.display = 'block';
-    } catch (err) {
-      alert('전송 중 오류가 발생했습니다. 다시 시도해주세요.');
-      btn.textContent = '신청 완료하기';
-      btn.disabled = false;
+        const formData = {
+            timestamp: new Date().toLocaleString('ko-KR'),
+            name: document.getElementById('name').value.trim(),
+            backNumber: document.getElementById('backNumber').value.trim(),
+            weight: document.getElementById('weight').value.trim(),
+            height: document.getElementById('height').value.trim(),
+            topSize: document.querySelector('input[name="topSize"]:checked').value,
+            waistSize: document.getElementById('waistSize').value.trim(),
+            initial: document.getElementById('initial').value.trim(),
+            capSize: document.getElementById('capSize').value.trim(),
+            pantsStyle1: document.querySelector('input[name="pantsStyle1"]:checked').value,
+            pantsStyle2: document.querySelector('input[name="pantsStyle2"]:checked').value,
+            paddingInfo: paddingInfo
+        };
+
+        submitBtn.classList.add('loading');
+        submitBtn.disabled = true;
+
+        try {
+            await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+
+            document.getElementById('successOverlay').classList.add('show');
+            document.getElementById('uniformForm').reset();
+            document.getElementById('paddingDetails').style.display = 'none';
+
+        } catch (error) {
+            errorMsg.textContent = '전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+            errorMsg.classList.add('show');
+        } finally {
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
+        }
     }
-  });
+
+    function closeSuccess() {
+        document.getElementById('successOverlay').classList.remove('show');
+    }
 </script>
+
 </body>
 </html>
